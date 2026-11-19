@@ -1,0 +1,30 @@
+name: Build ESPHome CYD
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ESPHome
+        run: pip install esphome
+
+      - name: Compile firmware
+        run: esphome compile frame.yaml
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cyd-firmware
+          path: .esphome/build/cyd-photo-frame/.pioenvs/cyd-photo-frame/firmware.factory.bin
