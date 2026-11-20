@@ -9,7 +9,7 @@ esp32:
 wifi:
   ssid: "yt-netfree-2.4G"
   password: "9rrWceWcte"
-
+http_request:
 spi:
   clk_pin: GPIO14
   mosi_pin: GPIO13
